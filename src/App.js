@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
-import FormularioCadastro from "./components/FormularioCadastro/FormularioCadastro";
+import Formulario from "./components/FormularioCadastro/Formulario";
 import GoogleMap from "./components/GoogleMap/GoogleMap"
 import 'fontsource-roboto';
 
@@ -11,7 +11,7 @@ class App extends Component {
       <Fragment>
       <Container component="article" maxWidth="sm">
         <Typography variant="h3" component="h1" align="center" >Formulário de cadastro</Typography>
-        <FormularioCadastro aoEnviar={aoEnviarForm} validarCPF={validarCPF} />
+        <Formulario aoEnviar={aoEnviarForm} validarCPF={validarCPF} />
       </Container>
        <Container component="article" maxWidth="sm">
        <GoogleMap />
