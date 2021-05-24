@@ -10,7 +10,8 @@ export default class Linhas {
 
     getLinhas() {
         axios.get('http://www.poatransporte.com.br/php/facades/process.php?a=nc&p=%&t=o').then(res => {
-            this.linhas = res.data;
+            let sort = res.data.sort(function(a, b){return a.id-b.id});
+            this.linhas = sort;
             this.notificar();
         });
     }
