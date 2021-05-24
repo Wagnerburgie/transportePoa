@@ -1,36 +1,36 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
-import Formulario from "./components/FormularioCadastro/Formulario";
+//import Filtro from "./components/Filtro/Filtro";
 import GoogleMap from "./components/GoogleMap/GoogleMap"
 import 'fontsource-roboto';
+import Linhas from './dados/linhas'
+import FiltroClassComponent from "./components/FiltroClassComponent/index"
 
-import {Container, Typography } from "@material-ui/core"
+import { Container, Typography } from "@material-ui/core"
 class App extends Component {
+  constructor() {
+    super();
+    this.linhas = new Linhas();
+    //this.linhas.notificar();
+  }
   render() {
     return (
       <Fragment>
-      <Container component="article" maxWidth="sm">
-        <Typography variant="h3" component="h1" align="center" >Formulário de cadastro</Typography>
-        <Formulario aoEnviar={aoEnviarForm} validarCPF={validarCPF} />
-      </Container>
-       <Container component="article" maxWidth="sm">
-       <GoogleMap />
-       </Container>
-       </Fragment>
+        <Container component="article" maxWidth="lg">
+          <Typography variant="h3" component="h1" align="left" >Filtro</Typography>
+          <FiltroClassComponent adicionarLinha={this.linhas.adicionarLinha.bind(this.linha)} linhas={this.linhas} />
+        </Container>
+        <Container component="map" maxWidth="lg" align="right">
+          <GoogleMap />
+        </Container>
+      </Fragment>
     );
   }
 }
 
-function aoEnviarForm(dados){
-  console.log(dados);
-}
 
-function validarCPF(cpf){
-  if(cpf.length !== 11){
-    return {valido:false, texto:"CPF deve ter 11 digitos."}
-  }else{
-    return {valido:true, texto:""}
-  }
+function aoEnviarForm(dados) {
+  console.log(dados);
 }
 
 export default App;

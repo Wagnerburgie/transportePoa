@@ -17,7 +17,7 @@ function MyComponent() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
   })
   if(!isLoaded) return "Carregando Mapa";
-
+  
   return (
     <div>
     <GoogleMap
