@@ -3,15 +3,15 @@ import { Component } from "react";
 import DataGrid from "../DataGrid/DataGrid"
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    { field: 'codigo', headerName: 'Codigo', width: 150 },
-    { field: 'nome', headerName: 'Nome', width: 150 },
-  ];
+    { field: 'codigo', headerName: 'Código', width: 125 },
+    { field: 'nome', headerName: 'Nome', width: 350 },
+];
 class FiltroClass extends Component {
     constructor() {
         super();
         this.state = { linhas: [] };
         this._novasLinhas = this._novasLinhas.bind(this);
+        //this._getMarkers = this._getMarkers.bind(this);
     }
     _novasLinhas(linhas) {
         this.setState({ ...this.state, linhas })
@@ -19,13 +19,17 @@ class FiltroClass extends Component {
 
     componentDidMount() {
         this.props.linhas.inscrever(this._novasLinhas);
-        //this.props.linhas.notificar();
     }
+    // _getMarkers() {
+    //     this.props.markers.getMarkers(55);
+    // }
     _novasLinhas(linhas) {
-        this.setState({ ...this.state, linhas })
+        this.setState({ ...this.state, linhas });
     }
     render() {
-        return (<div><DataGrid data={this.state.linhas} columns={columns} /></div>);
+        return (
+            <DataGrid pagination rows={this.state.linhas} columns={columns} onCellClick={(event) => {this.props.selecionarLinha(event.id);}} />);
     }
 }
+//this.props.selecionarLinha(event.target)
 export default FiltroClass;
