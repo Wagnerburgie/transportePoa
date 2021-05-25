@@ -5,6 +5,7 @@ export default class Markers {
     constructor() {
         this.markers = [];
         this._inscritos = [];
+        this.id = '';
     }
 
     inscrever(func) {
@@ -12,17 +13,23 @@ export default class Markers {
     }
 
     getMarkers(id) {
-        console.log('teste do ',id);
-        axios.get('http://www.poatransporte.com.br/php/facades/process.php?a=il&p=' + id).then(res => {
-            let data = res.data;
-            this.markers = [];
-            for (let a in res.data) {
-                if (a > 0 && a < 99999) {
-                    this.markers.push(data[a])
+        if (!(id === this.id)) {
+            axios.get('http://www.poatransporte.com.br/php/facades/process.php?a=il&p=' + id).then(res => {
+                let data = res.data;
+                this.clearMarkers();
+                for (let a in res.data) {
+                    if (a > 0 && a < 99999) {
+                        this.markers.push(data[a])
+                    }
                 }
-            }
-            this.notificar();
-        });
+                this.id = id;
+                this.notificar();
+            });
+        }
+    }
+
+    clearMarkers() {
+        this.markers = [];
     }
 
     desincrever(func) {
@@ -30,7 +37,6 @@ export default class Markers {
     }
 
     notificar() {
-        //console.log(this.markers);
         this._inscritos.forEach(func => func(this.markers));
     }
 }
