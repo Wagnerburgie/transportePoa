@@ -15,6 +15,7 @@ export default class Markers {
         console.log('teste do ',id);
         axios.get('http://www.poatransporte.com.br/php/facades/process.php?a=il&p=' + id).then(res => {
             let data = res.data;
+            this.markers = [];
             for (let a in res.data) {
                 if (a > 0 && a < 99999) {
                     this.markers.push(data[a])
