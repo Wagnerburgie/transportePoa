@@ -30,7 +30,7 @@ function FormularioCadastro({ linhas, aoEnviar }) {
                 margin="normal"
                 fullWidth
             />
-            <DataGrid data={linhas.linhas} />
+            <DataGrid rows={linhas.linhas} />
             <Button onClick={() => setCount(count + 1)} variant="contained" color="primary">
                 Pesquisar
       </Button>
