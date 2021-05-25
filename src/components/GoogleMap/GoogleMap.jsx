@@ -10,6 +10,9 @@ const libraries = ["places"];
 
 function MyComponent({ markers, center }) {
   const [marker, setMarkers] = useState([]);
+  useEffect(() => {
+    markers.inscrever(_novasMarkers);
+  })
   //useObservable(markers, setMarkers);
 
   //Monta o script para o GoogleMaps
@@ -19,10 +22,6 @@ function MyComponent({ markers, center }) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
   })
 
-  useEffect(() => {
-    console.log('o que é isso...',markers);
-  });
-
   if (!isLoaded) return "Carregando Mapa";
 
   return (
@@ -30,9 +29,6 @@ function MyComponent({ markers, center }) {
       mapContainerStyle={containerStyle}
       center={center}
       zoom={12}
-      onClick={(event) => {
-        console.log(event.latLng.lng());
-      }}
     >
       {/* {markers.markers.map((marker, index) => (
         <Marker key={index} position={{lat:Number(marker.lat), lng:Number(marker.lng)}}/>
@@ -41,6 +37,10 @@ function MyComponent({ markers, center }) {
       <Polyline key={0} path={markers.markers.map((marker) => ({ lat: Number(marker.lat), lng: Number(marker.lng) }))} />
     </GoogleMap>
   )
+
+  function _novasMarkers(markers) {
+    setMarkers({ marker, markers });
+  }
 }
 
 export default MyComponent;
