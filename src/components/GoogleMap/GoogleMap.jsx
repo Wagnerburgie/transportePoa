@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useLoadScript, Marker, Polyline } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript , Polyline } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '75vw',
@@ -10,13 +10,20 @@ const libraries = ["places"];
 
 function MyComponent({ markers, center }) {
   const [marker, setMarkers] = useState([]);
+
   useEffect(() => {
     markers.inscrever(_novasMarkers);
   })
-  //useObservable(markers, setMarkers);
 
+  const options = {
+    strokeColor: '#0000ff',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#0000ff',
+    fillOpacity: 0.35,
+  }
   //Monta o script para o GoogleMaps
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useLoadScript({
     libraries,
     //Api Key salva no env.local
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
@@ -30,16 +37,11 @@ function MyComponent({ markers, center }) {
       center={center}
       zoom={12}
     >
-      {/* {markers.markers.map((marker, index) => (
-        <Marker key={index} position={{lat:Number(marker.lat), lng:Number(marker.lng)}}/>
-        )
-    )} */}
-      <Polyline key={0} path={markers.markers.map((marker) => ({ lat: Number(marker.lat), lng: Number(marker.lng) }))} />
+      <Polyline key="polyline" path={markers.markers.map((marker) => ({ lat: Number(marker.lat), lng: Number(marker.lng) }))} options={options} />
     </GoogleMap>
   )
-
   function _novasMarkers(markers) {
-    setMarkers({ marker, markers });
+    setMarkers({ ...marker, markers });
   }
 }
 
