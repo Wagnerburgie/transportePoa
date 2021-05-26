@@ -14,9 +14,15 @@ export default class Markers {
 
     getMarkers(id) {
         if (!(id === this.id)) {
+            this.clearMarkers();
+            this.getMark(id);
+        }
+    }
+
+    async getMark(id) {
+        try {
             axios.get('http://www.poatransporte.com.br/php/facades/process.php?a=il&p=' + id).then(res => {
                 let data = res.data;
-                this.clearMarkers();
                 for (let a in res.data) {
                     if (a > 0 && a < 99999) {
                         this.markers.push(data[a])
@@ -25,6 +31,9 @@ export default class Markers {
                 this.id = id;
                 this.notificar();
             });
+        }
+        catch {
+            console.log('Erro');
         }
     }
 
