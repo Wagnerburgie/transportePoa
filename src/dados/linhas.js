@@ -11,12 +11,12 @@ export default class Linhas {
 
     getLinhas() {
         axios.get('http://www.poatransporte.com.br/php/facades/process.php?a=nc&p=%&t=' + this.tipoBus).then(res => {
-            let sort = res.data.sort(function(a, b){return a.id-b.id});
+            let sort = res.data.sort(function (a, b) { return a.id - b.id });
             this.linhas = sort;
             this.notificar();
         });
     }
-    
+
     inscrever(func) {
         this._inscritos.push(func);
     }
@@ -30,7 +30,7 @@ export default class Linhas {
         this._inscritos = this._inscritos.filter(f => f !== func);
     }
 
-    alteraTipoBus(tipoBus){
+    alteraTipoBus(tipoBus) {
         this.tipoBus = tipoBus;
         this.getLinhas();
     }
