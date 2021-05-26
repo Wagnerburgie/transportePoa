@@ -22,11 +22,6 @@ class App extends Component {
     super();
     this.linhas = new Linhas();
     this.markers = new Markers();
-    this.getMarkers = this.getMarkers.bind(this);
-  }
-
-  getMarkers(id) {
-    this.markers.getMarkers(id);
   }
 
   render() {
@@ -34,10 +29,9 @@ class App extends Component {
       <Grid container style={gridStyle}>
         <Grid item xs={3}>
           <FiltroClassComponent
-            adicionarLinha={this.linhas.adicionarLinha.bind(this.linha)}
             linhas={this.linhas}
             markers={this.markers}
-            selecionarLinha={(id) => { this.getMarkers(id) }}
+            getMarkers={this.markers.getMarkers.bind(this.markers)}
           />
         </Grid>
         <Grid item xs={9}>
