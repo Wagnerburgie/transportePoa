@@ -18,17 +18,24 @@ class FiltroClass extends Component {
     }
 
     _novasLinhas(linhas) {
+        //Retorna as novas linhas
         this.setState({ ...this.state, linhas, linhasFiltro: linhas }, () => {
+            //Aplica o filtro nas novas linhas
             this.filtrarLinhas();
         })
     }
 
     _alteraTipoBus(tipoBus) {
+        //Altera o tipo de onibus
         this.props.linhas.alteraTipoBus(tipoBus);
     }
 
     componentDidMount() {
         this.props.linhas.inscrever(this._novasLinhas);
+    }
+
+    componentWillUnmount() {
+        this.props.linhas.desincrever(this._novasLinhas);
     }
 
     filtrarLinhas() {
@@ -58,13 +65,16 @@ class FiltroClass extends Component {
                     </Select>
                     <TextField id="standard-basic"
                         label="Nome"
-                        style={{marginLeft:"23px", width:"100%"}}
+                        style={{ marginLeft: "23px", width: "100%" }}
                         value={this.state.nomeLinha}
                         onChange={(event) => { this.setState({ nomeLinha: event.target.value }) }}
                         onKeyUp={() => { this.filtrarLinhas() }}
                     />
                 </FormControl>
-                <DataGrid pagination rows={this.state.linhasFiltro} columns={columns} onCellClick={(event) => { this.props.selecionarLinha(event.id); }} />
+                <DataGrid
+                    pagination rows={this.state.linhasFiltro}
+                    columns={columns}
+                    onCellClick={(event) => { this.props.getMarkers(event.id); }} />
             </div>);
     }
 }

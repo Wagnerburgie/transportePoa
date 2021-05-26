@@ -3,8 +3,8 @@ import "./App.css";
 //import Filtro from "./components/Filtro/Filtro";
 import GoogleMap from "./components/GoogleMap/GoogleMap";
 import 'fontsource-roboto';
-import Linhas from './dados/linhas';
-import Markers from './dados/markers';
+import Linhas from './dados/Linhas';
+import Markers from './dados/Markers';
 import FiltroClassComponent from "./components/FiltroClassComponent/index";
 import { Grid } from "@material-ui/core";
 
@@ -27,14 +27,14 @@ class App extends Component {
   render() {
     return (
       <Grid container style={gridStyle}>
-        <Grid item xs={3}>
+        <Grid item xs={3}  key='grid1'>
           <FiltroClassComponent
             linhas={this.linhas}
             markers={this.markers}
             getMarkers={this.markers.getMarkers.bind(this.markers)}
           />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={9}  key='grid2'>
           <GoogleMap markers={this.markers} center={center} />
         </Grid>
       </Grid>
