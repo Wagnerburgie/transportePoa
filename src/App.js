@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-//import Filtro from "./components/Filtro/Filtro";
 import GoogleMap from "./components/GoogleMap/GoogleMap";
 import 'fontsource-roboto';
 import Linhas from './dados/Linhas';
@@ -15,7 +14,6 @@ const gridStyle = {
 const center = {
   lat: -30.0277, lng: -51.2287
 };
-
 
 class App extends Component {
   constructor() {
@@ -35,7 +33,9 @@ class App extends Component {
           />
         </Grid>
         <Grid item xs={9} >
-          <GoogleMap markers={this.markers} center={center} />
+          <GoogleMap 
+          markers={this.markers} 
+          center={center} />
         </Grid>
       </Grid>
     );
