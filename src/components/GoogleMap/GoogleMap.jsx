@@ -5,7 +5,6 @@ const containerStyle = {
   width: '75vw',
   height: '100vh'
 };
-
 const libraries = ["places"];
 //Function Component
 function MyComponent({ markers, center }) {
@@ -14,11 +13,14 @@ function MyComponent({ markers, center }) {
   function _novasMarkers(markers) {
     //Troca pelas markers novas
     setMarkers([...markers]);
+    console.log('passa aqui');
   }
 
+
   useEffect(() => {
+    //Rodar somente uma vez os inscrever
     markers.inscrever(_novasMarkers);
-  })
+  }, [markers])
 
   const options = {
     strokeColor: '#0000ff',
