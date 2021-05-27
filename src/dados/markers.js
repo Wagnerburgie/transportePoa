@@ -2,6 +2,7 @@
 import axios from 'axios';
 
 export default class Markers {
+
     constructor() {
         this.markers = [];
         this._inscritos = [];
@@ -12,33 +13,25 @@ export default class Markers {
         this._inscritos.push(func);
     }
 
-    getMarkers(id) {
-        if (!(id === this.id)) {
-            this.clearMarkers();
-            this.getMark(id);
-        }
-    }
-
-    async getMark(id) {
+    async getMarkers(id) {
         try {
+        if (!(id === this.id)) {
+            this.markers = [];
             axios.get('http://www.poatransporte.com.br/php/facades/process.php?a=il&p=' + id).then(res => {
                 let data = res.data;
                 for (let a in res.data) {
                     if (a > 0 && a < 99999) {
-                        this.markers.push(data[a])
+                        this.markers.push(data[a]);
                     }
                 }
                 this.id = id;
                 this.notificar();
             });
         }
-        catch {
+        }
+        catch{
             console.log('Erro');
         }
-    }
-
-    clearMarkers() {
-        this.markers = [];
     }
 
     desincrever(func) {
