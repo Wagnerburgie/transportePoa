@@ -13,7 +13,6 @@ function MyComponent({ markers, center }) {
   function _novasMarkers(markers) {
     //Troca pelas markers novas
     setMarkers([...markers]);
-    console.log('passa aqui');
   }
 
 
